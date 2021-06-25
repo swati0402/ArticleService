@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "55a8bfff-3866-4889-bc75-c51051060447",
+		"name": "ArticleService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PublishNewArticle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"AssetId\": \"0f9b15f5-f048-d9f8-b9f1-e201f110b22f\" ,\r\n\"Slug\": \"retail-clinics-next-frontier-of-primary-care-delivery-patients-receptive\",\r\n\"Thumbnail\": \"https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/herrington.jpg\",\r\n\"Url\": \"https://en.wikipedia.org/wiki/Test_article\",\r\n\"PublicationDateUtc\": \"2020-12-03T05:00:00Z\",\r\n\"Author\": \"Test Author\",\r\n\"AssetType\": \"Article\",\r\n\"Body\": \"html-of-article\",\r\n\"Geographies\": [\"United States\"],\r\n\"Topics\": [\"Digital Health\"],\r\n\"Version\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/article",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WithdrawArticle",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/article?assetid=0f9b15f5-f048-d9f8-b9f1-e201f110b22f&version=7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"article"
+					],
+					"query": [
+						{
+							"key": "assetid",
+							"value": "0f9b15f5-f048-d9f8-b9f1-e201f110b22f"
+						},
+						{
+							"key": "version",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
