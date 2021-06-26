@@ -6,6 +6,6 @@ namespace ArticleService.Core.Interfaces
     public interface IArticleRepository
     {
         Task<string> NewArticle(Article article, string content);
-        Task<string> WithdrawArticle(string assetid, int version);
+        Task<string> WithdrawArticle(string content);
     }
 }

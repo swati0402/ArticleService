@@ -26,21 +26,24 @@ namespace ArticleService.Controllers
         [HttpDelete]
         public async Task<IActionResult> WithdrawArtcle([FromQuery] string assetid, [FromQuery] int version)
         {
+            var response = "";
             try
             {
                 if (_repository != null)
                 {
                     _logger.LogInformation($"Withdraw article by assetid, version {assetid} {version}");
-                    await _repository.WithdrawArticle(assetid, version);
-                    return Ok("Aritcle Withdrawn");
+                    var request = new { AssetId = assetid, Version = version };
+                    var item = JsonSerializer.Serialize(request, new JsonSerializerOptions { PropertyNameCaseInsensitive = true, MaxDepth = 20 });
+                    response = await _repository.WithdrawArticle(item);
+                    return Ok(response);
                 }
                 return BadRequest("Service issue");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-    }
-}
+            }
+        }
 
         //Publish new Article
         [HttpPost]
@@ -52,15 +55,15 @@ namespace ArticleService.Controllers
                 {
                     var item = JsonSerializer.Serialize(article, new JsonSerializerOptions { PropertyNameCaseInsensitive = true, MaxDepth = 20 });
 
-                    _logger.LogInformation("New article is published with AssetId: ", article.AssetId);
+                    _logger.LogInformation($"New article is published with AssetId: {article.AssetId}");
 
                     await _repository.NewArticle(article, item).ConfigureAwait(false);
                     return Ok(article);
                 }
-                
+
                 return BadRequest("Service issue");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
