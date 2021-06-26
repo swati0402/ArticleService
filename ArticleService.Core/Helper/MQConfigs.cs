@@ -36,7 +36,7 @@ namespace ArticleService.Core.Helper
                 var type = ea.RoutingKey;
                 SaveData s = new SaveData();
                 //Added logic for saving in Sqllite db. But had issues in adding migration. So, just added code logic in here for review.
-                s.AddArticleAsync(data,type);
+                s.ProcessessData(data,type);
             };
             channel.BasicConsume(queue: "article.articleservice",
                                      autoAck: true,

@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ArticleService.Core.Models
+﻿namespace ArticleService.Core.Models
 {
-    public class Article
+    public class ArticleData
     {
-        //public int? Id { get; set; }
+        public int Id { get; set; }
         public string AssetId { get; set; }
         public string Slug { get; set; }
         public string Thumbnail { get; set; }
@@ -13,10 +11,8 @@ namespace ArticleService.Core.Models
         public string Author { get; set; }
         public string AssetType { get; set; }
         public string Body { get; set; }
-        [NotMapped]
-        public string[] Geographies { get; set; }
-        [NotMapped]
-        public string[] Topics { get; set; }
+        public string Geographies { get; set; }
+        public string Topics { get; set; }
         public int Version { get; set; }
     }
 }
