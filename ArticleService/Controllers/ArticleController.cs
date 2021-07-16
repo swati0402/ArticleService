@@ -31,7 +31,7 @@ namespace ArticleService.Controllers
             {
                 if (_repository != null)
                 {
-                    _logger.LogInformation($"Withdraw article by assetid, version {assetid} {version}");
+                    _logger.LogInformation($"Withdraw article by assetid {assetid}, version {version}");
                     var request = new { AssetId = assetid, Version = version };
                     var item = JsonSerializer.Serialize(request, new JsonSerializerOptions { PropertyNameCaseInsensitive = true, MaxDepth = 20 });
                     response = await _repository.WithdrawArticle(item);

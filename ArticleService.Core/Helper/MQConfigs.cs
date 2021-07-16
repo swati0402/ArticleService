@@ -20,14 +20,15 @@ namespace ArticleService.Core.Helper
                                              basicProperties: null,
                                              body: body);
         }
-        public void ListenForIntegrationEvents()
+        public  string ListenForIntegrationEvents()
         {
             var factory = new ConnectionFactory();
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
             var consumer = new EventingBasicConsumer(channel);
+            var msg = "";
 
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
@@ -35,12 +36,13 @@ namespace ArticleService.Core.Helper
                 var data = JObject.Parse(message);
                 var type = ea.RoutingKey;
                 SaveData s = new SaveData();
-                //Added logic for saving in Sqllite db. But had issues in adding migration. So, just added code logic in here for review.
-                s.ProcessessData(data,type);
+                //Added logic for saving in Sqllite db.
+                msg= await s.ProcessessData(data,type);
             };
             channel.BasicConsume(queue: "article.articleservice",
                                      autoAck: true,
                                      consumer: consumer);
+            return msg;
         }
     }
 }

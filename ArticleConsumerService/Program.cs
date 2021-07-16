@@ -1,6 +1,7 @@
 using ArticleService.Core.Helper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace ArticleConsumerService
 {
@@ -14,7 +15,8 @@ namespace ArticleConsumerService
         public static void ConsumeService()
         {
             MQConfigs mq = new MQConfigs();
-            mq.ListenForIntegrationEvents();
+            string msg= mq.ListenForIntegrationEvents();
+            Console.WriteLine(" [x] ConsumeService:", msg);
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

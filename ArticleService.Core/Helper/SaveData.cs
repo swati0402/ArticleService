@@ -67,7 +67,7 @@ namespace ArticleService.Core.Helper
                 await dbContext.Articles.AddAsync(article);
                 await dbContext.SaveChangesAsync();
 
-                return "";
+                return "Aritcle posted with Article Id:" + article.Id.ToString();
             }
             catch (Exception ex)
             {
